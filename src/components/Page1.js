@@ -28,8 +28,6 @@ const Page1 = () => {
                         if (d[d.length - 1] === '"')
                             d = d.substring(d.length - 2, 1)
                     }
-                    // console.log(d)
-                    // console.log(headers[j])
                     if (headers[j]) {
                         obj[headers[j]] = d
                         obj_table.push(d)
@@ -37,24 +35,20 @@ const Page1 = () => {
                 }
 
                 if (Object.values(obj).filter(x => x).length > 0) {
-                    // console.log(obj)
                     list.push(obj)
                     list_table.push(obj_table)
                 }
             }
         }
-        // console.log(list)
-        // console.log(list_table)
-
         const columns = headers.map(c => ({
-            name: c,
-            selector: c,
+            name: c
         }));
 
         const tableData = {
             header: columns,
             body: list,
-            table_data: list_table
+            table_data: list_table,
+            writable: [headers].concat(list_table)
         }
         console.log(tableData)
         dispatch(csvTransection(tableData))

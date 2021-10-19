@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from "react-router"
+import { CSVLink } from "react-csv";
 
 const Page2 = () => {
 
@@ -10,12 +11,14 @@ const Page2 = () => {
     console.log(csvData)
 
     const returnUploadComponent = () => {
-        setTimeout( () => {
+        setTimeout(() => {
             history.push({
                 pathname: "/"
             });
         }, 1500)
     }
+
+    let csvReport = csvData.writable
 
     return (
         <div className="container-fluid">
@@ -50,7 +53,7 @@ const Page2 = () => {
                             </table>
                         </div>
                         <div className="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" className="btn btn-secondary">Download CSV File</button>
+                            <CSVLink type="button" className="btn btn-secondary" data={csvReport} >Download CSV File</CSVLink>
                         </div>
 
                         <div className="grid-container mt-4">
