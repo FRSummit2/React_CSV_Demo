@@ -54,8 +54,8 @@ const Page1 = () => {
         dispatch(csvTransection(tableData))
 
         history.push({
-            pathname:  "/page2"
-         });
+            pathname: "/page2"
+        });
     }
 
     const handleFileUpload = e => {
@@ -73,14 +73,15 @@ const Page1 = () => {
     }
 
     return (
-        <div className="container">
+        <div className="container mt-5">
             <div className="container-fluid d-flex justify-content-center align-items-center">
-                <div className="row align-items-center">
-                    <div className="col-lg-4 col-md-4 col-sm-4">
-                        <label htmlFor="exampleInputEmail1">CSV file link</label>
+                <div className="input-group">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text" id="inputGroupFileAddon01">Upload CSV File</span>
                     </div>
-                    <div className="col-lg-8 col-md-8 col-sm-8">
-                        <input type="file" className="border-0" accept=".csv,.xlsx,.xls" onChange={handleFileUpload} />
+                    <div className="custom-file">
+                        <input type="file" className="custom-file-input" onChange={handleFileUpload} accept=".csv,.xlsx,.xls" />
+                        <label className="custom-file-label" htmlFor="inputGroupFile01">Choose file</label>
                     </div>
                 </div>
             </div>

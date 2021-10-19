@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from "react-router"
 import { CSVLink } from "react-csv"
@@ -10,6 +10,7 @@ import { NavLink } from 'react-router-dom';
 const Page2 = () => {
 
     const history = useHistory();
+    const [scatter, setScatterData] = useState(null)
 
     const csvData = useSelector(state => state.csvTransection)
     console.log(csvData)
@@ -24,15 +25,70 @@ const Page2 = () => {
 
     let csvReport = csvData ? csvData.writable : []
 
+    const generatePlotCLickHandler = e => {
+        e.preventDefault()
+        console.log(e)
+        console.log(e.target.elements.x_axis_name.value)
+        console.log(e.target.elements.x_axis_column.value)
+        console.log(e.target.elements.y_axis_name.value)
+        console.log(e.target.elements.y_axis_column.value)
+
+        let chart_data = []
+        let x_axis_max_val = 0
+        let y_axis_max_val = 0
+        csvData.table_data.forEach((el, index) => {
+            let target_x = el[e.target.elements.x_axis_column.value]
+            let target_y = el[e.target.elements.y_axis_column.value]
+            let point = []
+            if(index === 0) {
+                point.push(e.target.elements.x_axis_name.value)
+                point.push(e.target.elements.y_axis_name.value)
+                chart_data.push(point)
+                point = []
+            }
+            if(!isNaN(target_x) && (target_x !== '') 
+                && !isNaN(target_y) && (target_y !== '')) {
+                x_axis_max_val = x_axis_max_val > parseFloat(target_x) ? x_axis_max_val : parseFloat(target_x)
+                y_axis_max_val = y_axis_max_val > parseFloat(target_y) ? y_axis_max_val : parseFloat(target_y)
+                point.push(parseFloat(target_x))
+                point.push(parseFloat(target_y))
+                chart_data.push(point)
+            } else {
+                return
+            }
+        })
+
+        let scatter_arr = []
+        scatter_arr.push(chart_data)
+
+        let scatter_data = {
+            x_axis_title: e.target.elements.x_axis_name.value,
+            x_axis_max_val: x_axis_max_val,
+            y_axis_title: e.target.elements.y_axis_name.value,
+            y_axis_max_val: y_axis_max_val,
+            data: scatter_arr
+        }
+
+        console.log(scatter_data)
+
+        setScatterData(scatter_data)
+        
+        e.target.elements.x_axis_name.value = ''
+        e.target.elements.x_axis_column.value = null
+        e.target.elements.y_axis_name.value = ''
+        e.target.elements.y_axis_column.value = null
+        document.getElementById('scatter-popup-close').click()
+    }
+
     return (
-        <div className="container-fluid">
-            <div className="header">
+        <div className="container-fluid p-0">
+            <div className="header p-3">
                 <NavLink exact to="/">Back to Home</NavLink>
+                <h4>CSV Data Table</h4>
             </div>
             {
                 csvData ?
                     <>
-                        <h4>CSV Data Table</h4>
                         <div className="table-responsive">
                             <table className="table">
                                 <thead>
@@ -59,15 +115,11 @@ const Page2 = () => {
                                 </tbody>
                             </table>
                         </div>
-                        <div className="btn-group" role="group" aria-label="Basic example">
+                        <div className="btn-group p-1" role="group" aria-label="Basic example">
                             <CSVLink type="button" className="btn btn-secondary" data={csvReport} >Download CSV File</CSVLink>
                         </div>
 
-                        <div className="grid-container mt-4">
-                            <div className="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" className="btn btn-secondary">Download PDF</button>
-                            </div>
-
+                        <div className="grid-container mt-4 p-1 mb-5">
                             <ul className="nav nav-tabs nav-justified" role="tablist">
                                 <li className="nav-item">
                                     <a className="nav-link active" id="scatter-tab" data-toggle="tab" href="#scatter" role="tab" aria-controls="scatter" aria-selected="true">Scatter</a>
@@ -80,19 +132,67 @@ const Page2 = () => {
                                 </li>
                             </ul>
                             <div className="tab-content">
-                                {/* Scatter Plot Tab */}
                                 <div className="tab-pane fade show active" id="scatter" role="tabpanel" aria-labelledby="scatter-tab">
-                                    <div id="chart">
-                                        <Scatter />
-                                    </div>
+                                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#scatter-modal">Generate Custom</button>
+                                    <Scatter scatterData={scatter} />
                                 </div>
-                                {/* Box Plot Tab */}
                                 <div className="tab-pane fade" id="box" role="tabpanel" aria-labelledby="box-tab">
+                                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#report-modal">Generate Custom</button>
                                     <PlotBox />
                                 </div>
-                                {/* Histogram Plot Tab */}
                                 <div className="tab-pane fade" id="histogram" role="tabpanel" aria-labelledby="histogram-tab">
+                                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#report-modal">Generate Custom</button>
                                     <Histogram />
+                                </div>
+                            </div>
+                            {/* Plot Generator modal */}
+                            <div className="modal" id="scatter-modal" tabIndex="-1" role="dialog" aria-labelledby="scatter" aria-hidden="true">
+                                <div className="modal-dialog modal-dialog-centered" role="document">
+                                    <div className="modal-content">
+                                        <div className="modal-header">
+                                            <h5 className="modal-title">Select Plot Fields</h5>
+                                            <button type="button" className="close" id="scatter-popup-close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div className="modal-body">
+                                            <form className="row" onSubmit={generatePlotCLickHandler}>
+                                                <div className="col-12 form-group">
+                                                    <label htmlFor="x_axis_name">X Axis Name</label>
+                                                    <input type="text" className="form-control" name="x_axis_name" id="x_axis_name" name="x_axis_val" placeholder="Ex: Age" />
+                                                </div>
+                                                <div className="col-12 form-group">
+                                                    <label htmlFor="x_axis_column">Select X Axis Table Column</label>
+                                                    <select className="form-control" name="x_axis_column" id="x_axis_column">
+                                                        <option>Select Parameter</option>
+                                                        {
+                                                            csvData.header.map((el, index) => (
+                                                                <option key={index} value={index}>{el.name}</option>
+                                                            ))
+                                                        }
+                                                    </select>
+                                                </div>
+                                                <div className="col-12 form-group">
+                                                    <label htmlFor="y_axis_name">Y Axis Name</label>
+                                                    <input type="text" className="form-control" name="y_axis_name" id="y_axis_name" placeholder="Ex: Weight" />
+                                                </div>
+                                                <div className="col-12 form-group">
+                                                    <label htmlFor="y_axis_column">Select Y Axis Table Column</label>
+                                                    <select className="form-control" name="y_axis_column" id="y_axis_column">
+                                                        <option>Select Parameter</option>
+                                                        {
+                                                            csvData.header.map((el, index) => (
+                                                                <option key={index} value={index}>{el.name}</option>
+                                                            ))
+                                                        }
+                                                    </select>
+                                                </div>
+                                                <div className="modal-footer justify-content-center w-100">
+                                                    <button type="submit" className="btn btn-primary btn-global">Generate</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
