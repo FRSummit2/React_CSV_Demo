@@ -1,11 +1,16 @@
 import React from 'react';
+import { useSelector } from 'react-redux'
 
 const Page2 = () => {
+
+    const csvData = useSelector(state => state.csvTransection)
+    console.log(csvData)
+
     return (
         <div className="container-fluid">
             <h4>CSV Data Table</h4>
-            <div class="table-responsive">
-                <table class="table">
+            <div className="table-responsive">
+                <table className="table">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -58,13 +63,13 @@ const Page2 = () => {
                     </tbody>
                 </table>
             </div>
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">Download CSV File</button>
+            <div className="btn-group" role="group" aria-label="Basic example">
+                <button type="button" className="btn btn-secondary">Download CSV File</button>
             </div>
             
             <div className="grid-container mt-4">
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-secondary">Download PDF</button>
+                <div className="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" className="btn btn-secondary">Download PDF</button>
                 </div>
             </div>
         </div>

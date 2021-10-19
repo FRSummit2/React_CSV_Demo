@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as XLSX from 'xlsx';
-import DataTable from 'react-data-table-component';
+import { useDispatch } from 'react-redux'
+import { csvTransection } from '../actions';
+import { useHistory } from "react-router"
 
 const Page1 = () => {
 
-    const [columns, setColumns] = useState([]);
-    const [data, setData] = useState([]);
+    const dispatch = useDispatch()
+    const history = useHistory();
 
-    // process CSV data
     const processData = dataString => {
         const dataStringLines = dataString.split(/\r\n|\n/);
         const headers = dataStringLines[0].split(/,(?![^"]*"(?:(?:[^"]*"){2})*[^"]*$)/);
@@ -30,38 +31,37 @@ const Page1 = () => {
                     }
                 }
 
-                // remove the blank rows
                 if (Object.values(obj).filter(x => x).length > 0) {
                     list.push(obj);
                 }
             }
         }
 
-        // prepare columns list from headers
         const columns = headers.map(c => ({
             name: c,
             selector: c,
         }));
-        console.log(columns)
-        console.log(list)
 
-        setData(list);
-        setColumns(columns);
+        const tableData = {
+            header: columns,
+            body: list
+        }
+        console.log(tableData)
+        dispatch(csvTransection(tableData))
+        
+        history.push({
+            pathname:  "/page2"
+         });
     }
 
-    // handle file upload
     const handleFileUpload = e => {
         const file = e.target.files[0];
         const reader = new FileReader();
         reader.onload = (evt) => {
-            /* Parse data */
             const bstr = evt.target.result;
-            // console.log(bstr)
             const wb = XLSX.read(bstr, { type: 'binary' });
-            /* Get first worksheet */
             const wsname = wb.SheetNames[0];
             const ws = wb.Sheets[wsname];
-            /* Convert array of arrays */
             const data = XLSX.utils.sheet_to_csv(ws, { header: 1 });
             processData(data);
         };
@@ -72,24 +72,14 @@ const Page1 = () => {
         <div className="container">
             <div className="container-fluid d-flex justify-content-center align-items-center">
                 <div className="row align-items-center">
-                    <div className="col-lg-3 col-md-3 col-sm-4">
+                    <div className="col-lg-4 col-md-4 col-sm-4">
                         <label htmlFor="exampleInputEmail1">CSV file link</label>
                     </div>
-                    <div className="col-lg-6 col-md-6 col-sm-4">
+                    <div className="col-lg-8 col-md-8 col-sm-8">
                         <input type="file" className="border-0" accept=".csv,.xlsx,.xls" onChange={handleFileUpload} />
-                    </div>
-                    <div className="col-lg-3 col-md-3 col-sm-4">
-                        <button type="submit" className="btn btn-primary">Submit</button>
                     </div>
                 </div>
             </div>
-
-            {/* <DataTable
-                pagination
-                highlightOnHover
-                columns={columns}
-                data={data}
-            /> */}
         </div>
     );
 }
