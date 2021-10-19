@@ -5,6 +5,7 @@ import { CSVLink } from "react-csv"
 import Scatter from './PlotScatter'
 import PlotBox from './PlotBox'
 import Histogram from './PlotHistogram'
+import { NavLink } from 'react-router-dom';
 
 const Page2 = () => {
 
@@ -25,6 +26,9 @@ const Page2 = () => {
 
     return (
         <div className="container-fluid">
+            <div className="header">
+                <NavLink exact to="/">Back to Home</NavLink>
+            </div>
             {
                 csvData ?
                     <>
