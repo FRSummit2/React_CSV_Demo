@@ -1,7 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from "react-router"
-import { CSVLink } from "react-csv";
+import { CSVLink } from "react-csv"
+import Scatter from './PlotScatter'
 
 const Page2 = () => {
 
@@ -18,7 +19,7 @@ const Page2 = () => {
         }, 1500)
     }
 
-    let csvReport = csvData.writable
+    let csvReport = csvData ? csvData.writable : []
 
     return (
         <div className="container-fluid">
@@ -60,6 +61,32 @@ const Page2 = () => {
                             <div className="btn-group" role="group" aria-label="Basic example">
                                 <button type="button" className="btn btn-secondary">Download PDF</button>
                             </div>
+
+                            <ul class="nav nav-tabs nav-justified" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="scatter-tab" data-toggle="tab" href="#scatter" role="tab" aria-controls="scatter" aria-selected="true">Scatter</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="box-tab" data-toggle="tab" href="#box" role="tab" aria-controls="box" aria-selected="false">Box</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="histogram-tab" data-toggle="tab" href="#histogram" role="tab" aria-controls="histogram" aria-selected="false">Histogram</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                {/* Scatter Plot Tab */}
+                                <div class="tab-pane fade show active" id="scatter" role="tabpanel" aria-labelledby="scatter-tab">
+                                    <div id="chart">
+                                        <Scatter />
+                                    </div>
+                                </div>
+                                {/* Box Plot Tab */}
+                                <div class="tab-pane fade" id="box" role="tabpanel" aria-labelledby="box-tab">Box</div>
+                                {/* Histogram Plot Tab */}
+                                <div class="tab-pane fade" id="histogram" role="tabpanel" aria-labelledby="histogram-tab">Histogram</div>
+                            </div>
+
+
                         </div>
                     </> :
                     <>
@@ -70,7 +97,7 @@ const Page2 = () => {
                     </>
             }
 
-        </div>
+        </div >
     );
 }
 
