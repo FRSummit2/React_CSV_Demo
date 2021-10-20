@@ -1,9 +1,23 @@
 import React from 'react'
-import Histogram from 'react-chart-histogram';
+import Histogram from 'react-chart-histogram'
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
 
 class PlotHistogram extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    saveAsPdf = () => {
+        const input = document.getElementById('histogram-plot')
+        html2canvas(input)
+            .then((canvas) => {
+                let imgData = canvas.toDataURL('image/png')
+                const pdf = new jsPDF('p', 'pt', 'a4')
+                pdf.addImage(imgData, 'PNG', 0, 0)
+                pdf.output('dataurlnewwindow')
+                pdf.save("download.pdf")
+            })
     }
 
     render() {
@@ -13,7 +27,7 @@ class PlotHistogram extends React.Component {
 
         return (
             <>
-                <div className="histogram d-flex justify-content-center mt-3 mb-5">
+                <div className="histogram d-flex justify-content-center mt-3 mb-5" id="histogram-plot">
                     <Histogram
                         xLabels={labels}
                         yValues={data}
@@ -23,7 +37,7 @@ class PlotHistogram extends React.Component {
                     />
                 </div>
                 <div className="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" className="btn btn-secondary">Download PDF</button>
+                    <button type="button" className="btn btn-secondary" onClick={() => this.saveAsPdf()}>Download PDF</button>
                 </div>
             </>
         )

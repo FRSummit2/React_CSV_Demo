@@ -74,6 +74,27 @@ const Page2 = () => {
         document.getElementById('scatter-popup-close').click()
     }
 
+    const generateBoxPlotClickHandler =e => {
+        e.preventDefault()
+
+        let x_axis_data = []
+        let max = 0
+        csvData.table_data.forEach(el => {
+            let target_x = parseInt(el[e.target.elements.b_x_axis_column.value])
+            max = max > target_x ? max : target_x
+            
+            x_axis_data.push(target_x)
+        })
+        let box_data = {
+            data: x_axis_data,
+            max: max
+        }
+        setBoxPlotData(box_data)
+
+        e.target.elements.b_x_axis_column.value = null
+        document.getElementById('box-popup-close').click()
+    }
+
     const generateHistogramPlotClickHandler = e => {
         e.preventDefault()
 
@@ -96,27 +117,6 @@ const Page2 = () => {
         e.target.elements.h_x_axis_column.value = null
         e.target.elements.h_y_axis_column.value = null
         document.getElementById('histogram-popup-close').click()
-    }
-
-    const generateBoxPlotClickHandler =e => {
-        e.preventDefault()
-
-        let x_axis_data = []
-        let max = 0
-        csvData.table_data.forEach(el => {
-            let target_x = parseInt(el[e.target.elements.b_x_axis_column.value])
-            max = max > target_x ? max : target_x
-            
-            x_axis_data.push(target_x)
-        })
-        let box_data = {
-            data: x_axis_data,
-            max: max
-        }
-        setBoxPlotData(box_data)
-
-        e.target.elements.b_x_axis_column.value = null
-        document.getElementById('box-popup-close').click()
     }
 
     return (

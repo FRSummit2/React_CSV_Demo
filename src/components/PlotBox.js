@@ -1,10 +1,24 @@
 import React from 'react'
 import { Boxplot, computeBoxplotStats } from 'react-boxplot'
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf'
 
 class Plot extends React.Component {
     constructor(props) {
         super(props);
         console.log(this.props)
+    }
+
+    saveAsPdf = () => {
+        const input = document.getElementById('box-plot')
+        html2canvas(input)
+            .then((canvas) => {
+                const imgData = canvas.toDataURL('image/png')
+                const pdf = new jsPDF('p', 'pt', 'a4')
+                pdf.addImage(imgData, 'PNG', 0, 0)
+                pdf.output('dataurlnewwindow')
+                pdf.save("download.pdf")
+            })
     }
 
     render() {
@@ -13,7 +27,7 @@ class Plot extends React.Component {
 
         return (
             <>
-                <div className="d-flex justify-content-center mt-3 mb-5">
+                <div className="d-flex justify-content-center mt-3 mb-5" id="box-plot">
                     <Boxplot
                         width={400}
                         height={20}
@@ -24,7 +38,7 @@ class Plot extends React.Component {
                     />
                 </div>
                 <div className="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" className="btn btn-secondary">Download PDF</button>
+                    <button type="button" className="btn btn-secondary" onClick={() => this.saveAsPdf()}>Download PDF</button>
                 </div>
             </>
         )
