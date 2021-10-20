@@ -1,9 +1,9 @@
 import React from 'react'
 import { Boxplot, computeBoxplotStats } from 'react-boxplot'
-import ReactHighchart from 'react-highcharts';
+// import ReactHighchart from 'react-highcharts';
 import BoxPlot from './boxplot';
 const boxplot = new BoxPlot()
-var test = require('./test.html')
+// var test = require('./test.html')
 
 class Plot extends React.Component {
     render() {
@@ -114,7 +114,7 @@ class Plot extends React.Component {
                         max={30}
                         stats={computeBoxplotStats(values)}
                     />
-                    <iframe src={test}></iframe>
+                    {/* <iframe src={test}></iframe> */}
                     {/* <ReactHighchart config={config} domProps={{ id: 'chartId' }}></ReactHighchart> */}
                 </div>
                 <div className="btn-group" role="group" aria-label="Basic example">
