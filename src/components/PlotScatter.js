@@ -43,8 +43,15 @@ const ScatterPlot = (props) => {
                     data={arr_data}
                     options={{
                         title: (props.scatterData ? props.scatterData.x_axis_title : 'Age') + ' vs. ' + (props.scatterData ? props.scatterData.y_axis_title : 'Weight') + ' comparison',
-                        hAxis: { title: (props.scatterData ? props.scatterData.x_axis_title : 'Age'), minValue: 0, maxValue: (props.scatterData ? props.scatterData.x_axis_max_val : 15) },
-                        vAxis: { title: (props.scatterData ? props.scatterData.y_axis_title : 'Weight'), minValue: 0, maxValue: (props.scatterData ? props.scatterData.x_axis_max_val : 15) },
+                        hAxis: { 
+                            title: (props.scatterData ? props.scatterData.x_axis_title : 'Age'), 
+                            minValue: 0, 
+                            maxValue: (props.scatterData ? props.scatterData.x_axis_max_val : 15) 
+                        },
+                        vAxis: { 
+                            title: (props.scatterData ? props.scatterData.y_axis_title : 'Weight'), 
+                            minValue: 0, 
+                            maxValue: (props.scatterData ? props.scatterData.x_axis_max_val : 15) },
                         legend: 'none',
                     }}
                     rootProps={{ 'data-testid': '1' }}

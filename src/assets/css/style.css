@@ -51,3 +51,8 @@ table tbody tr:hover {
     background-color: #026dd12a;
     font-weight     : 500;
 }
+
+.histogram canvas {
+    /* width: 50% !important;
+    height: auto !important; */
+}
