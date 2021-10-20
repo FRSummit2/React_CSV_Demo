@@ -1,5 +1,4 @@
 import React from 'react'
-import Chart from "react-google-charts";
 import Histogram from 'react-chart-histogram';
 
 class PlotHistogram extends React.Component {

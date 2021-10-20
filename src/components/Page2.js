@@ -12,6 +12,7 @@ const Page2 = () => {
     const history = useHistory();
     const [scatter, setScatterData] = useState(null)
     const [histogram, setHistogramData] = useState(null)
+    const [boxPlotData, setBoxPlotData] = useState(null)
 
     const csvData = useSelector(state => state.csvTransection)
     console.log(csvData)
@@ -106,6 +107,27 @@ const Page2 = () => {
         document.getElementById('histogram-popup-close').click()
     }
 
+    const generateBoxPlotClickHandler =e => {
+        e.preventDefault()
+
+        let x_axis_data = []
+        let max = 0
+        csvData.table_data.forEach(el => {
+            let target_x = parseInt(el[e.target.elements.b_x_axis_column.value])
+            max = max > target_x ? max : target_x
+            
+            x_axis_data.push(target_x)
+        })
+        let box_data = {
+            data: x_axis_data,
+            max: max
+        }
+        setBoxPlotData(box_data)
+
+        e.target.elements.b_x_axis_column.value = null
+        document.getElementById('box-popup-close').click()
+    }
+
     return (
         <div className="container-fluid p-0">
             <div className="header p-3">
@@ -163,8 +185,8 @@ const Page2 = () => {
                                     <Scatter scatterData={scatter} />
                                 </div>
                                 <div className="tab-pane fade text-center" id="box" role="tabpanel" aria-labelledby="box-tab">
-                                    <button type="button" className="btn btn-primary mt-2" data-toggle="modal" data-target="#report-modal">Generate Custom</button>
-                                    <PlotBox />
+                                    <button type="button" className="btn btn-primary mt-2" data-toggle="modal" data-target="#box-modal">Generate Custom</button>
+                                    <PlotBox boxPlotData={boxPlotData}/>
                                 </div>
                                 <div className="tab-pane fade text-right" id="histogram" role="tabpanel" aria-labelledby="histogram-tab">
                                     <button type="button" className="btn btn-primary mt-2" data-toggle="modal" data-target="#histogram-modal">Generate Custom</button>
@@ -205,6 +227,37 @@ const Page2 = () => {
                                                 <div className="col-12 form-group">
                                                     <label htmlFor="y_axis_column">Select Y Axis Table Column</label>
                                                     <select className="form-control" name="y_axis_column" id="y_axis_column">
+                                                        <option>Select Parameter</option>
+                                                        {
+                                                            csvData.header.map((el, index) => (
+                                                                <option key={index} value={index}>{el.name}</option>
+                                                            ))
+                                                        }
+                                                    </select>
+                                                </div>
+                                                <div className="modal-footer justify-content-center w-100">
+                                                    <button type="submit" className="btn btn-primary btn-global">Generate</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* Plot Generator modal - BOX */}
+                            <div className="modal" id="box-modal" tabIndex="-1" role="dialog" aria-labelledby="scatter" aria-hidden="true">
+                                <div className="modal-dialog modal-dialog-centered" role="document">
+                                    <div className="modal-content">
+                                        <div className="modal-header">
+                                            <h5 className="modal-title">Select Plot Fields</h5>
+                                            <button type="button" className="close" id="box-popup-close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div className="modal-body">
+                                            <form className="row" onSubmit={generateBoxPlotClickHandler}>
+                                                <div className="col-12 form-group">
+                                                    <label htmlFor="b_x_axis_column">Select X Axis Column</label>
+                                                    <select className="form-control" name="b_x_axis_column" id="b_x_axis_column">
                                                         <option>Select Parameter</option>
                                                         {
                                                             csvData.header.map((el, index) => (
