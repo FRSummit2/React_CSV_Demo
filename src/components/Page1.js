@@ -50,7 +50,7 @@ const Page1 = () => {
             table_data: list_table,
             writable: [headers].concat(list_table)
         }
-        console.log(tableData)
+        
         dispatch(csvTransection(tableData))
 
         history.push({

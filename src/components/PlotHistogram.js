@@ -4,15 +4,6 @@ import Histogram from 'react-chart-histogram';
 class PlotHistogram extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props)
-    }
-
-    componentDidMount = () => {
-        console.log(this.props)
-    }
-
-    componentDidUpdate = () => {
-        console.log(this.props.histogramData)
     }
 
     render() {

@@ -15,7 +15,6 @@ const Page2 = () => {
     const [boxPlotData, setBoxPlotData] = useState(null)
 
     const csvData = useSelector(state => state.csvTransection)
-    console.log(csvData)
 
     const returnUploadComponent = () => {
         setTimeout(() => {
@@ -29,11 +28,6 @@ const Page2 = () => {
 
     const generateScatterPlotClickHandler = e => {
         e.preventDefault()
-        console.log(e)
-        console.log(e.target.elements.x_axis_name.value)
-        console.log(e.target.elements.x_axis_column.value)
-        console.log(e.target.elements.y_axis_name.value)
-        console.log(e.target.elements.y_axis_column.value)
 
         let chart_data = []
         let x_axis_max_val = 0
@@ -71,8 +65,6 @@ const Page2 = () => {
             data: scatter_arr
         }
 
-        console.log(scatter_data)
-
         setScatterData(scatter_data)
 
         e.target.elements.x_axis_name.value = ''
@@ -94,8 +86,7 @@ const Page2 = () => {
             x_axis_data.push(target_x)
             y_axis_data.push(target_y)
         })
-        // console.log(x_axis_data)
-        // console.log(y_axis_data)
+        
         let histogram_data = {
             labels: x_axis_data,
             data: y_axis_data

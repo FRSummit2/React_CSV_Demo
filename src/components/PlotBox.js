@@ -7,10 +7,6 @@ class Plot extends React.Component {
         console.log(this.props)
     }
 
-    componentDidUpdate = () => {
-        console.log(this.props.boxPlotData.data)
-    }
-
     render() {
         let values = this.props.boxPlotData ? this.props.boxPlotData.data : [14, 15, 16, 16, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 19, 19, 19, 20, 20, 20, 20, 20, 20, 21, 21, 22, 23, 24, 24, 29]
         let max_val = this.props.boxPlotData ? this.props.boxPlotData.max : 30
