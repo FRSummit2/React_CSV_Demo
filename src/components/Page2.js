@@ -74,7 +74,7 @@ const Page2 = () => {
         document.getElementById('scatter-popup-close').click()
     }
 
-    const generateBoxPlotClickHandler =e => {
+    const generateBoxPlotClickHandler = e => {
         e.preventDefault()
 
         let x_axis_data = []
@@ -82,7 +82,7 @@ const Page2 = () => {
         csvData.table_data.forEach(el => {
             let target_x = parseInt(el[e.target.elements.b_x_axis_column.value])
             max = max > target_x ? max : target_x
-            
+
             x_axis_data.push(target_x)
         })
         let box_data = {
@@ -103,11 +103,11 @@ const Page2 = () => {
         csvData.table_data.forEach(el => {
             let target_x = el[e.target.elements.h_x_axis_column.value]
             let target_y = el[e.target.elements.h_y_axis_column.value]
-            
+
             x_axis_data.push(target_x)
             y_axis_data.push(target_y)
         })
-        
+
         let histogram_data = {
             labels: x_axis_data,
             data: y_axis_data
@@ -123,7 +123,9 @@ const Page2 = () => {
         <div className="container-fluid p-0">
             <div className="header p-3">
                 <NavLink exact to="/">Back to Home</NavLink>
-                <h4>CSV Data Table</h4>
+                {
+                    csvData ? <h4>CSV Data Table</h4> : ''
+                }
             </div>
             {
                 csvData ?
@@ -177,7 +179,7 @@ const Page2 = () => {
                                 </div>
                                 <div className="tab-pane fade text-center" id="box" role="tabpanel" aria-labelledby="box-tab">
                                     <button type="button" className="btn btn-primary mt-2" data-toggle="modal" data-target="#box-modal">Generate Custom</button>
-                                    <PlotBox boxPlotData={boxPlotData}/>
+                                    <PlotBox boxPlotData={boxPlotData} />
                                 </div>
                                 <div className="tab-pane fade text-right" id="histogram" role="tabpanel" aria-labelledby="histogram-tab">
                                     <button type="button" className="btn btn-primary mt-2" data-toggle="modal" data-target="#histogram-modal">Generate Custom</button>
