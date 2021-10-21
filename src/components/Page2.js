@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from "react-router"
 import { CSVLink } from "react-csv"
@@ -13,6 +13,14 @@ const Page2 = () => {
     const [scatter, setScatterData] = useState(null)
     const [histogram, setHistogramData] = useState(null)
     const [boxPlotData, setBoxPlotData] = useState(null)
+    const [boxPlotDataColumn, setBoxPlotDataColumn] = useState([])
+    const [boxPlotDataCount, setBoxPlotDataCount] = useState(0)
+
+    // useEffect(() => {
+    //     console.log('useEffect')
+    //     setBoxPlotDataColumn([])
+    //     setBoxPlotDataCount(0)
+    // }, []);
 
     const csvData = useSelector(state => state.csvTransection)
 
@@ -74,24 +82,32 @@ const Page2 = () => {
         document.getElementById('scatter-popup-close').click()
     }
 
-    const generateBoxPlotClickHandler = e => {
-        e.preventDefault()
+    const boxColumnSelectionOnChange = e => {
+        console.log(e.target.value)
 
-        let x_axis_data = []
-        let max = 0
+        let selected_column_data = []
         csvData.table_data.forEach(el => {
-            let target_x = parseInt(el[e.target.elements.b_x_axis_column.value])
-            max = max > target_x ? max : target_x
+            let single_data = parseInt(el[e.target.value])
 
-            x_axis_data.push(target_x)
+            selected_column_data.push(single_data)
         })
+        console.log(selected_column_data)
+
+        let single_box_data = {
+            x: csvData.header[e.target.value].name,
+            y: selected_column_data
+        }
+
+        let arr = boxPlotDataColumn
+        arr.push(single_box_data)
+        setBoxPlotDataColumn(arr)
+        let cnt = boxPlotDataCount
+        setBoxPlotDataCount(cnt++)
+        console.log(boxPlotDataColumn)
+
         let box_data = {
-            data: x_axis_data,
-            max: max
         }
         setBoxPlotData(box_data)
-
-        e.target.elements.b_x_axis_column.value = null
         document.getElementById('box-popup-close').click()
     }
 
@@ -179,7 +195,7 @@ const Page2 = () => {
                                 </div>
                                 <div className="tab-pane fade text-center" id="box" role="tabpanel" aria-labelledby="box-tab">
                                     <button type="button" className="btn btn-primary mt-2" data-toggle="modal" data-target="#box-modal">Generate Custom</button>
-                                    <PlotBox boxPlotData={boxPlotData} />
+                                    <PlotBox boxPlotDataColumn={boxPlotDataColumn} />
                                 </div>
                                 <div className="tab-pane fade text-right" id="histogram" role="tabpanel" aria-labelledby="histogram-tab">
                                     <button type="button" className="btn btn-primary mt-2" data-toggle="modal" data-target="#histogram-modal">Generate Custom</button>
@@ -247,10 +263,10 @@ const Page2 = () => {
                                             </button>
                                         </div>
                                         <div className="modal-body">
-                                            <form className="row" onSubmit={generateBoxPlotClickHandler}>
+                                            <form className="row">
                                                 <div className="col-12 form-group">
                                                     <label htmlFor="b_x_axis_column">Select X Axis Column</label>
-                                                    <select className="form-control" name="b_x_axis_column" id="b_x_axis_column">
+                                                    <select className="form-control mt-1" name="b_x_axis_column" id="b_x_axis_column" onChange={ boxColumnSelectionOnChange }>
                                                         <option>Select Parameter</option>
                                                         {
                                                             csvData.header.map((el, index) => (
@@ -258,9 +274,6 @@ const Page2 = () => {
                                                             ))
                                                         }
                                                     </select>
-                                                </div>
-                                                <div className="modal-footer justify-content-center w-100">
-                                                    <button type="submit" className="btn btn-primary btn-global">Generate</button>
                                                 </div>
                                             </form>
                                         </div>
