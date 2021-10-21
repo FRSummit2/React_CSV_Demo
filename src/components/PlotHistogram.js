@@ -9,13 +9,15 @@ class PlotHistogram extends React.Component {
     }
 
     saveAsPdf = () => {
-        const input = document.getElementById('histogram-plot')
+        let input = document.getElementById('histogram-plot')
         html2canvas(input)
             .then((canvas) => {
                 let imgData = canvas.toDataURL('image/png')
-                const pdf = new jsPDF('p', 'pt', 'a4')
+                console.log(imgData)
+                let pdf = new jsPDF('p', 'pt', 'a4')
                 pdf.addImage(imgData, 'PNG', 0, 0)
-                pdf.output('dataurlnewwindow')
+                // pdf.output('dataurlnewwindow')
+                console.log(pdf)
                 pdf.save("download.pdf")
             })
     }

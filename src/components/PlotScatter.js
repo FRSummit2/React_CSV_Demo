@@ -20,18 +20,18 @@ const ScatterPlot = (props) => {
             [20, 15],
         ]
 
-        const saveAsPdf = () => {
-            const input = document.getElementById('scatter-plot')
-            html2canvas(input)
-                .then((canvas) => {
-                    const imgData = canvas.toDataURL('image/png')
-                    console.log(imgData)
-                    const pdf = new jsPDF('p', 'pt', 'a4')
-                    pdf.addImage(imgData, 'PNG', 0, 0)
-                    pdf.output('dataurlnewwindow')
-                    pdf.save("download.pdf")
-                })
-        }
+    const saveAsPdf = () => {
+        let input = document.getElementById('scatter-plot')
+        html2canvas(input)
+            .then((canvas) => {
+                let imgData = canvas.toDataURL('image/png')
+                console.log(imgData)
+                let pdf = new jsPDF('p', 'pt', 'a4')
+                pdf.addImage(imgData, 'PNG', 0, 0, 0, 0)
+                pdf.output('dataurlnewwindow')
+                pdf.save("download.pdf")
+            })
+    }
 
     return (
         <>

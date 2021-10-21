@@ -10,11 +10,11 @@ class Plot extends React.Component {
     }
 
     saveAsPdf = () => {
-        const input = document.getElementById('box-plot')
+        let input = document.getElementById('box-plot')
         html2canvas(input)
             .then((canvas) => {
-                const imgData = canvas.toDataURL('image/png')
-                const pdf = new jsPDF('p', 'pt', 'a4')
+                let imgData = canvas.toDataURL('image/png')
+                let pdf = new jsPDF('p', 'pt', 'a4')
                 pdf.addImage(imgData, 'PNG', 0, 0)
                 pdf.output('dataurlnewwindow')
                 pdf.save("download.pdf")
