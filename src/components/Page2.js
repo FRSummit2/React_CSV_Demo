@@ -16,6 +16,8 @@ const Page2 = () => {
     const [boxPlotDataColumn, setBoxPlotDataColumn] = useState([])
     const [boxPlotDataCount, setBoxPlotDataCount] = useState(0)
 
+    const [csvSplitedData, setCsvSplitedData] = useState([])
+
     // useEffect(() => {
     //     console.log('useEffect')
     //     setBoxPlotDataColumn([])
@@ -23,6 +25,7 @@ const Page2 = () => {
     // }, []);
 
     const csvData = useSelector(state => state.csvTransection)
+    console.log(csvData)
 
     const returnUploadComponent = () => {
         setTimeout(() => {
@@ -133,6 +136,12 @@ const Page2 = () => {
         e.target.elements.h_x_axis_column.value = null
         e.target.elements.h_y_axis_column.value = null
         document.getElementById('histogram-popup-close').click()
+    }
+
+    const restFiveSecond = () => {
+        setTimeout(() => {
+            console.log('resting')
+        }, 5000)
     }
 
     return (
@@ -266,7 +275,7 @@ const Page2 = () => {
                                             <form className="row">
                                                 <div className="col-12 form-group">
                                                     <label htmlFor="b_x_axis_column">Select X Axis Column</label>
-                                                    <select className="form-control mt-1" name="b_x_axis_column" id="b_x_axis_column" onChange={ boxColumnSelectionOnChange }>
+                                                    <select className="form-control mt-1" name="b_x_axis_column" id="b_x_axis_column" onChange={boxColumnSelectionOnChange}>
                                                         <option>Select Parameter</option>
                                                         {
                                                             csvData.header.map((el, index) => (

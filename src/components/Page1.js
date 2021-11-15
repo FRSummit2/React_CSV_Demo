@@ -1,7 +1,7 @@
 import React from 'react'
 import * as XLSX from 'xlsx'
-import { useDispatch } from 'react-redux'
-import { csvTransection } from '../actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { csvTransection, testReduxData } from '../actions'
 import { useHistory } from "react-router"
 
 const Page1 = () => {
@@ -50,12 +50,18 @@ const Page1 = () => {
             table_data: list_table,
             writable: [headers].concat(list_table)
         }
-        
+
         dispatch(csvTransection(tableData))
 
-        history.push({
-            pathname: "/page2"
-        });
+        if(document.getElementById('radio-input').checked === false) {
+            history.push({
+                pathname: "/page2"
+            });
+        } else {
+            history.push({
+                pathname: "/page3"
+            }); 
+        }
     }
 
     const handleFileUpload = e => {
@@ -72,8 +78,33 @@ const Page1 = () => {
         reader.readAsBinaryString(file)
     }
 
+    const goToLoadPage = () => {
+        // history.push({
+        //     pathname: "/page3"
+        // });
+        console.log(document.getElementById('radio-input').checked)
+    }
+
+    let csvData = useSelector(state => state.testReduxData)
+
+    const changeState = () => {
+        console.log('changeState')
+
+        // let tableData = {
+        //     name: 'F R SUMMIT'
+        // }
+
+        let tableData = 'F R SUMMIT'
+
+        dispatch(testReduxData(tableData))
+    }
+
     return (
         <div className="container mt-5">
+            <div className="d-flex align-items-center">
+                <label className="mb-0 mr-4">Go to load page</label>
+                <input type="checkbox" id="radio-input" />
+            </div>
             <div className="container-fluid d-flex justify-content-center align-items-center">
                 <div className="input-group">
                     <div className="input-group-prepend">
@@ -84,6 +115,12 @@ const Page1 = () => {
                         <label className="custom-file-label" htmlFor="inputGroupFile01">Choose file</label>
                     </div>
                 </div>
+            </div>
+            <button className="m-4" onClick={ ()=>goToLoadPage() }>Load Page</button>
+            <div className="container-fluid mt-4">
+                <p>State data {csvData}</p>
+                <button onClick={() => changeState() }>Button</button>
+                {/* <button onClick={() => dispatch(testReduxData('F R SUMMIT')) }>Button</button> */}
             </div>
         </div>
     );

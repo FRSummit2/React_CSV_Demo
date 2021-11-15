@@ -4,3 +4,11 @@ export const csvTransection = (csv) => {
         payload: csv
     }
 }
+
+export const testReduxData = (csv) => {
+    console.log(csv)
+    return {
+        type: 'TEST_REDUX_DATA',
+        payload: csv
+    }
+}

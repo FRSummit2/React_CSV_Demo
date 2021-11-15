@@ -56,3 +56,16 @@ table tbody tr:hover {
     /* width: 50% !important;
     height: auto !important; */
 }
+
+.table-responsive {
+    position: relative;
+}
+tbody {
+    height: 400px;
+}
+.Wrapper {
+    /* z-index: 5; */
+    /* background: aliceblue;
+    opacity: .8; */
+    top: 30px;
+}
