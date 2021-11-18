@@ -69,3 +69,8 @@ tbody {
     opacity: .8; */
     top: 30px;
 }
+
+/* SIMPLE LIST/GRID DEMO */
+.react-recycled-row {
+    display: flex;
+}

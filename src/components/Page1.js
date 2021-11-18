@@ -85,6 +85,12 @@ const Page1 = () => {
         console.log(document.getElementById('radio-input').checked)
     }
 
+    const loadPage = (path) => {
+        history.push({
+            pathname: "/" + path
+        });
+    }
+
     let csvData = useSelector(state => state.testReduxData)
 
     const changeState = () => {
@@ -117,6 +123,9 @@ const Page1 = () => {
                 </div>
             </div>
             <button className="m-4" onClick={ ()=>goToLoadPage() }>Load Page</button>
+            <button className="m-4" onClick={ ()=>loadPage('simple-list-demo') }>Simple List Demo</button>
+            <button className="m-4" onClick={ ()=>loadPage('simple-grid-demo') }>Simple Grid Demo</button>
+            <button className="m-4" onClick={ ()=>loadPage('custom-window-demo') }>Custom Window Demo</button>
             <div className="container-fluid mt-4">
                 <p>State data {csvData}</p>
                 <button onClick={() => changeState() }>Button</button>
