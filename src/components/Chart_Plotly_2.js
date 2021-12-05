@@ -15,6 +15,17 @@ import Test_3 from './Chart_Plotly/Test_3';
 
 import ScatterPlots from './Chart_Plotly/ScatterPlots';
 
+import LineCharts from './Chart_Plotly/LineCharts';
+import LineCharts2 from './Chart_Plotly/LineCharts2';
+import LineCharts3 from './Chart_Plotly/LineCharts3';
+import LineCharts4 from './Chart_Plotly/LineCharts4';
+import LineCharts5 from './Chart_Plotly/LineCharts5';
+import LineCharts6 from './Chart_Plotly/LineCharts6';
+import LineCharts7 from './Chart_Plotly/LineCharts7';
+import LineCharts8 from './Chart_Plotly/LineCharts8';
+import LineCharts9 from './Chart_Plotly/LineCharts9';
+import LineCharts10 from './Chart_Plotly/LineCharts10';
+
 class ChartPlotly2 extends React.Component {
     render() {
         return (
@@ -28,6 +39,9 @@ class ChartPlotly2 extends React.Component {
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" id="scatter-tab" data-toggle="tab" href="#scatter" role="tab" aria-controls="scatter" aria-selected="true">Scatter</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" id="line-chart-tab" data-toggle="tab" href="#line-chart" role="tab" aria-controls="line-chart" aria-selected="true">Line Chart</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" id="box-tab" data-toggle="tab" href="#box" role="tab" aria-controls="box" aria-selected="false">Box</a>
@@ -44,6 +58,18 @@ class ChartPlotly2 extends React.Component {
                         </div>
                         <div className="tab-pane fade text-left show" id="scatter" role="tabpanel" aria-labelledby="scatter-tab">
                             <ScatterPlots />
+                        </div>
+                        <div className="tab-pane fade text-left show" id="line-chart" role="tabpanel" aria-labelledby="line-chart-tab">
+                            <LineCharts />
+                            <LineCharts2 />
+                            <LineCharts3 />
+                            <LineCharts4 />
+                            <LineCharts5 />
+                            <LineCharts6 />
+                            <LineCharts7 />
+                            <LineCharts8 />
+                            <LineCharts9 />
+                            <LineCharts10 />
                         </div>
                         <div className="tab-pane fade text-center" id="box" role="tabpanel" aria-labelledby="box-tab">
                             Box
