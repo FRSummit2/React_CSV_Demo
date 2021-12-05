@@ -41,5 +41,5 @@ export default ChartPlotly2
 
 
 
-
+// https://stackoverflow.com/questions/65866399/getting-an-out-of-memory-error-while-using-create-react-app-and-plotly-js
 // https://github.com/plotly/react-plotly.js/issues/135
