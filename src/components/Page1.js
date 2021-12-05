@@ -129,6 +129,8 @@ const Page1 = () => {
             
             <button className="m-4" onClick={ ()=>loadPage('render-html') }>Chart Plotly</button>
             <button className="m-4" onClick={ ()=>loadPage('basic-charts') }>Basic Chart</button>
+            <button className="m-4" onClick={ ()=>loadPage('statistical-charts') }>Statistical Charts</button>
+            <button className="m-4" onClick={ ()=>loadPage('animations') }>Animations</button>
             <div className="container-fluid mt-4">
                 <p>State data {csvData}</p>
                 <button onClick={() => changeState() }>Button</button>

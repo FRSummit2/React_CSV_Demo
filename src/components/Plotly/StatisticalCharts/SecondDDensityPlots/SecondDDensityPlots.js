@@ -6,19 +6,21 @@ const Plot = createPlotlyComponent(Plotly);
 
 class SecondDimentionaldDensityPlots extends React.Component {
 
+    
+    normal = () => {
+        var x = 0,
+            y = 0,
+            rds, c;
+        do {
+            x = Math.random() * 2 - 1;
+            y = Math.random() * 2 - 1;
+            rds = x * x + y * y;
+        } while (rds == 0 || rds > 1);
+        c = Math.sqrt(-2 * Math.log(rds) / rds); // Box-Muller transform
+        return x * c; // throw away extra sample y * c
+    }
+
     render() {
-        normal = () => {
-            var x = 0,
-                y = 0,
-                rds, c;
-            do {
-                x = Math.random() * 2 - 1;
-                y = Math.random() * 2 - 1;
-                rds = x * x + y * y;
-            } while (rds == 0 || rds > 1);
-            c = Math.sqrt(-2 * Math.log(rds) / rds); // Box-Muller transform
-            return x * c; // throw away extra sample y * c
-        }
 
         var N = 2000,
             a = -1,
@@ -29,8 +31,8 @@ class SecondDimentionaldDensityPlots extends React.Component {
 
         for (var i = 0; i < N; i++) {
             t[i] = a + step * i;
-            x[i] = (Math.pow(t[i], 3)) + (0.3 * normal());
-            y[i] = (Math.pow(t[i], 6)) + (0.3 * normal());
+            x[i] = (Math.pow(t[i], 3)) + (0.3 * this.normal());
+            y[i] = (Math.pow(t[i], 6)) + (0.3 * this.normal());
         }
 
         var trace1 = {

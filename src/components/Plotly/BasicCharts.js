@@ -58,10 +58,10 @@ class BasicCharts extends React.Component {
                             <Test_2 />
                             <Test_3 />
                         </div>
-                        <div className="tab-pane fade text-left show" id="scatter" role="tabpanel" aria-labelledby="scatter-tab">
+                        <div className="tab-pane fade text-left" id="scatter" role="tabpanel" aria-labelledby="scatter-tab">
                             <ScatterPlots />
                         </div>
-                        <div className="tab-pane fade text-left show" id="line-chart" role="tabpanel" aria-labelledby="line-chart-tab">
+                        <div className="tab-pane fade text-left" id="line-chart" role="tabpanel" aria-labelledby="line-chart-tab">
                             <LineCharts />
                             <LineCharts2 />
                             <LineCharts3 />

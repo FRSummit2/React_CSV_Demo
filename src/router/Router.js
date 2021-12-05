@@ -6,7 +6,11 @@ import SimpleListDemo from '../components/SimpleListDemo';
 import SimpleGridDemo from '../components/SimpleGridDemo';
 import CustomWindowDemo from '../components/CustomWindowDemo';
 import RanderHTML from '../components/RanderHTML';
+
 import BasicCharts from '../components/Plotly/BasicCharts';
+import StatisticalCharts from '../components/Plotly/StatisticalCharts';
+import Animations from '../components/Plotly/Animations';
+
 import PublicRoute from '../Utils/PublicRoute';
 
 function Router() {
@@ -22,6 +26,8 @@ function Router() {
                 <PublicRoute path="/custom-window-demo" component={CustomWindowDemo} />
                 <PublicRoute path="/render-html" component={RanderHTML} />
                 <PublicRoute path="/basic-charts" component={BasicCharts} />
+                <PublicRoute path="/statistical-charts" component={StatisticalCharts} />
+                <PublicRoute path="/animations" component={Animations} />
             </Switch>
         </div>
     );
