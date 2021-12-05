@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './assets/css/style.css'
+import './helper'
 
 import { createStore } from 'redux';
 import allReducer from './reducer'

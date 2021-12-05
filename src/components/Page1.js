@@ -126,6 +126,9 @@ const Page1 = () => {
             <button className="m-4" onClick={ ()=>loadPage('simple-list-demo') }>Simple List Demo</button>
             <button className="m-4" onClick={ ()=>loadPage('simple-grid-demo') }>Simple Grid Demo</button>
             <button className="m-4" onClick={ ()=>loadPage('custom-window-demo') }>Custom Window Demo</button>
+            
+            <button className="m-4" onClick={ ()=>loadPage('chart-plotly') }>Chart Plotly</button>
+            <button className="m-4" onClick={ ()=>loadPage('chart-plotly-2') }>Chart Plotly 2</button>
             <div className="container-fluid mt-4">
                 <p>State data {csvData}</p>
                 <button onClick={() => changeState() }>Button</button>
