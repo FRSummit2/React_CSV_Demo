@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom'
 // import Plot from 'react-plotly.js';
 
 // import createPlotlyComponent from 'react-plotly.js/factory';
@@ -9,29 +10,30 @@ import React from 'react';
 import createPlotlyComponent from "react-plotly.js/factory";
 const Plot = createPlotlyComponent(Plotly);*/
 
-import Test_1 from './Chart_Plotly/Test_1';
-import Test_2 from './Chart_Plotly/Test_2';
-import Test_3 from './Chart_Plotly/Test_3';
+import Test_1 from './Test/Test_1';
+import Test_2 from './Test/Test_2';
+import Test_3 from './Test/Test_3';
 
-import ScatterPlots from './Chart_Plotly/ScatterPlots';
+import ScatterPlots from './BasicCharts/ScatterPlots/ScatterPlots';
 
-import LineCharts from './Chart_Plotly/LineCharts';
-import LineCharts2 from './Chart_Plotly/LineCharts2';
-import LineCharts3 from './Chart_Plotly/LineCharts3';
-import LineCharts4 from './Chart_Plotly/LineCharts4';
-import LineCharts5 from './Chart_Plotly/LineCharts5';
-import LineCharts6 from './Chart_Plotly/LineCharts6';
-import LineCharts7 from './Chart_Plotly/LineCharts7';
-import LineCharts8 from './Chart_Plotly/LineCharts8';
-import LineCharts9 from './Chart_Plotly/LineCharts9';
-import LineCharts10 from './Chart_Plotly/LineCharts10';
+import LineCharts from './BasicCharts/LineChart/LineCharts';
+import LineCharts2 from './BasicCharts/LineChart/LineCharts2';
+import LineCharts3 from './BasicCharts/LineChart/LineCharts3';
+import LineCharts4 from './BasicCharts/LineChart/LineCharts4';
+import LineCharts5 from './BasicCharts/LineChart/LineCharts5';
+import LineCharts6 from './BasicCharts/LineChart/LineCharts6';
+import LineCharts7 from './BasicCharts/LineChart/LineCharts7';
+import LineCharts8 from './BasicCharts/LineChart/LineCharts8';
+import LineCharts9 from './BasicCharts/LineChart/LineCharts9';
+import LineCharts10 from './BasicCharts/LineChart/LineCharts10';
 
-class ChartPlotly2 extends React.Component {
+class BasicCharts extends React.Component {
     render() {
         return (
             <div className="plotly-js-2">
-
-
+                <div className="header p-3">
+                    <NavLink exact to="/">Back to Home</NavLink>
+                </div>
                 <div className="grid-container mt-4 p-1 mb-5">
                     <ul className="nav nav-tabs nav-justified" role="tablist">
                         <li className="nav-item">
@@ -152,7 +154,7 @@ class ChartPlotly2 extends React.Component {
     }
 }
 
-export default ChartPlotly2
+export default BasicCharts
 
 
 

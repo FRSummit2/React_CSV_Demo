@@ -5,8 +5,8 @@ import LoadPage from '../components/LoadPage';
 import SimpleListDemo from '../components/SimpleListDemo';
 import SimpleGridDemo from '../components/SimpleGridDemo';
 import CustomWindowDemo from '../components/CustomWindowDemo';
-import ChartPlotly from '../components/Chart_Plotly';
-import ChartPlotly2 from '../components/Chart_Plotly_2';
+import RanderHTML from '../components/RanderHTML';
+import BasicCharts from '../components/Plotly/BasicCharts';
 import PublicRoute from '../Utils/PublicRoute';
 
 function Router() {
@@ -20,8 +20,8 @@ function Router() {
                 <PublicRoute path="/simple-list-demo" component={SimpleListDemo} />
                 <PublicRoute path="/simple-grid-demo" component={SimpleGridDemo} />
                 <PublicRoute path="/custom-window-demo" component={CustomWindowDemo} />
-                <PublicRoute path="/chart-plotly" component={ChartPlotly} />
-                <PublicRoute path="/chart-plotly-2" component={ChartPlotly2} />
+                <PublicRoute path="/render-html" component={RanderHTML} />
+                <PublicRoute path="/basic-charts" component={BasicCharts} />
             </Switch>
         </div>
     );

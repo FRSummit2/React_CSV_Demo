@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 // import test_html from './test.html'
 
-const ChartPlotly = () => {
+const RanderHTML = () => {
 
     return (
         <div className="container-fluid p-0">
@@ -20,7 +20,7 @@ const ChartPlotly = () => {
     );
 }
 
-export default ChartPlotly;
+export default RanderHTML;
 
 
 // npm install react-plotly.js plotly.js
