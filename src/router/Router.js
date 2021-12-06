@@ -10,6 +10,7 @@ import RanderHTML from '../components/RanderHTML';
 import BasicCharts from '../components/Plotly/BasicCharts';
 import StatisticalCharts from '../components/Plotly/StatisticalCharts';
 import Animations from '../components/Plotly/Animations';
+import Maps from '../components/Plotly/Maps';
 
 import PublicRoute from '../Utils/PublicRoute';
 
@@ -28,6 +29,7 @@ function Router() {
                 <PublicRoute path="/basic-charts" component={BasicCharts} />
                 <PublicRoute path="/statistical-charts" component={StatisticalCharts} />
                 <PublicRoute path="/animations" component={Animations} />
+                <PublicRoute path="/map-chart" component={Maps} />
             </Switch>
         </div>
     );

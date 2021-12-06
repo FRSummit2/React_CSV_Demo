@@ -60,9 +60,11 @@ table tbody tr:hover {
 .table-responsive {
     position: relative;
 }
+
 tbody {
     height: 400px;
 }
+
 .Wrapper {
     /* z-index: 5; */
     /* background: aliceblue;
@@ -73,4 +75,31 @@ tbody {
 /* SIMPLE LIST/GRID DEMO */
 .react-recycled-row {
     display: flex;
+}
+
+.custom-row {
+    display: block;
+    width  : 100%;
+}
+
+.blue-btn-menu {
+    width           : 24%;
+    display         : inline-block;
+    margin          : 10px 4px;
+    color           : #fff;
+    background-color: #007bff;
+    cursor          : pointer;
+    font-weight     : 500;
+    text-align      : center;
+    vertical-align  : middle;
+    padding         : 0.375rem 0.75rem;
+    font-size       : 1rem;
+    line-height     : 1.5;
+    border          : 1px solid transparent;
+    border-radius   : 0.25rem;
+    transition      : color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.blue-btn-menu:hover {
+    background-color: #0062cc;
 }

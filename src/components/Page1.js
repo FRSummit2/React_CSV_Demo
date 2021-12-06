@@ -53,14 +53,14 @@ const Page1 = () => {
 
         dispatch(csvTransection(tableData))
 
-        if(document.getElementById('radio-input').checked === false) {
+        if (document.getElementById('radio-input').checked === false) {
             history.push({
                 pathname: "/page2"
             });
         } else {
             history.push({
                 pathname: "/page3"
-            }); 
+            });
         }
     }
 
@@ -122,18 +122,23 @@ const Page1 = () => {
                     </div>
                 </div>
             </div>
-            <button className="m-4" onClick={ ()=>goToLoadPage() }>Load Page</button>
-            <button className="m-4" onClick={ ()=>loadPage('simple-list-demo') }>Simple List Demo</button>
-            <button className="m-4" onClick={ ()=>loadPage('simple-grid-demo') }>Simple Grid Demo</button>
-            <button className="m-4" onClick={ ()=>loadPage('custom-window-demo') }>Custom Window Demo</button>
-            
-            <button className="m-4" onClick={ ()=>loadPage('render-html') }>Chart Plotly</button>
-            <button className="m-4" onClick={ ()=>loadPage('basic-charts') }>Basic Chart</button>
-            <button className="m-4" onClick={ ()=>loadPage('statistical-charts') }>Statistical Charts</button>
-            <button className="m-4" onClick={ ()=>loadPage('animations') }>Animations</button>
+
+            <div className="row m-0 custom-row">
+                <button className="blue-btn-menu col-lg-3 col-md-2 col-sm-2" onClick={() => goToLoadPage()}>Load Page</button>
+                <button className="blue-btn-menu col-lg-3 col-md-2 col-sm-2" onClick={() => loadPage('simple-list-demo')}>Simple List Demo</button>
+                <button className="blue-btn-menu col-lg-3 col-md-2 col-sm-2" onClick={() => loadPage('simple-grid-demo')}>Simple Grid Demo</button>
+                <button className="blue-btn-menu col-lg-3 col-md-2 col-sm-2" onClick={() => loadPage('custom-window-demo')}>Custom Window Demo</button>
+
+                <button className="blue-btn-menu col-lg-3 col-md-2 col-sm-2" onClick={() => loadPage('render-html')}>Chart Plotly</button>
+                <button className="blue-btn-menu col-lg-3 col-md-2 col-sm-2" onClick={() => loadPage('basic-charts')}>Basic Chart</button>
+                <button className="blue-btn-menu col-lg-3 col-md-2 col-sm-2" onClick={() => loadPage('statistical-charts')}>Statistical Charts</button>
+                <button className="blue-btn-menu col-lg-3 col-md-2 col-sm-2" onClick={() => loadPage('animations')}>Animations</button>
+                <button className="blue-btn-menu col-lg-3 col-md-2 col-sm-2" onClick={() => loadPage('map-chart')}>Map Chart</button>
+            </div>
+
             <div className="container-fluid mt-4">
                 <p>State data {csvData}</p>
-                <button onClick={() => changeState() }>Button</button>
+                <button className="blue-btn-menu" onClick={() => changeState()}>Button</button>
                 {/* <button onClick={() => dispatch(testReduxData('F R SUMMIT')) }>Button</button> */}
             </div>
         </div>
