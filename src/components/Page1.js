@@ -43,6 +43,41 @@ const Page1 = () => {
         const columns = headers.map(c => ({
             name: c
         }));
+        
+//=============================================================================
+        console.log(list)
+        console.log(columns)
+        function getUnique(array, key) {
+            if (typeof key !== 'function') {
+              const property = key;
+              key = function(item) { return item[property]; };
+            }
+            return Array.from(array.reduce(function(map, item) {
+              const k = key(item);
+              if (!map.has(k)) map.set(k, item);
+              return map;
+            }, new Map()).values());
+          }
+        //   const items = [
+        //     { id: 2, name: "sumit" },
+        //     { id: 1, name: "amit" },
+        //     { id: 3, name: "sam" },
+        //     { id: 4, name: "jay" },
+        //     { id: 2, name: "ra one" },
+        //     { id: 3, name: "alex" },
+        //     { id: 1, name: "devid" },
+        //     { id: 7, name: "sam" },
+        //   ];
+          console.log(getUnique(list, 'Asset Type'));
+          let hh = [{name: 'Asset Type'}, {name: 'Longitude'}]
+          let ex_arr = list
+        //   columns.forEach(element => {
+          hh.forEach(element => {
+            // console.log(ex_arr)
+            ex_arr = getUnique(ex_arr, element.name)
+          });
+          console.log(ex_arr)
+//=============================================================================
 
         const tableData = {
             header: columns,
